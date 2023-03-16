@@ -6,6 +6,7 @@
 
 @layer base {
     body {
-        @apply font-OpenSans;
+        font-family: 'Open Sans', sans-serif;
+        background-color: #fff;
     }
 }

@@ -11,7 +11,7 @@ module.exports = {
         dark: "#3A4256",
       },
       fontFamily: {
-        OpenSans: ["Open Sans', sans-serif"]
+        "OpenSans": ["Open Sans', sans-serif"]
       }
     },
   },
