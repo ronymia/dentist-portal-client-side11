@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { HiOutlineSearch, HiOutlineShoppingBag } from "react-icons/hi";
 
 
 const Header = () => {
@@ -35,7 +34,7 @@ const Header = () => {
      );
 
      return (
-          <header className="navbar h-20 md:px-[7%] px-2 sticky top-0 bg-white z-50 mb-5">
+          <header className="navbar md:px-[7%] px-2 fixed top-0 bg-white z-50 mb-5">
                <div className="navbar-start pl-2">
                     <Link to="/" className="">
                          <h3 className="text-2xl text-dark font-medium">Dentist portal</h3>
