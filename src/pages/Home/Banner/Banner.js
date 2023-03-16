@@ -7,7 +7,7 @@ export default function Banner() {
         <div style={{
             background: `url(${bannerBg})`,
             objectFit: "cover",
-        }} className="hero h-[700px]">
+        }} className={"hero h-[700px]"}>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={chair} className="rounded-lg lg:w-1/2 shadow-2xl" alt='' />
                 <div>
