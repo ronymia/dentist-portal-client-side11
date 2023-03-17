@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 // import { useAuth } from "../../../hooks/useAuth";
 // import { toast } from "react-hot-toast";
@@ -58,12 +59,12 @@ const Login = () => {
     // };
 
     return (
-        <section className="w-full bg-white h-[80vh] flex items-center justify-center">
+        <section className="w-full bg-white h-[90vh] flex items-center justify-center">
             <div
                 style={{
                     boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)"
                 }}
-                className=" bg-white mx-auto rounded-[18px] p-8"
+                className=" bg-white rounded-[18px] p-8"
             >
                 <h1 className="mb-6 text-4xl font-semibold block text-center text-black">
                     Login
@@ -141,20 +142,20 @@ const Login = () => {
                     </button>
                 </form>
 
-                {/* SOCIAL LOGIN  */}
-
-                <div>
-                    {/* <SocialLogin /> */}
-                </div>
                 <h3 className="block text-center text-dark text-sm capitalize mt-3">
                     new to denist portal ? {""}
                     <Link
-                        to={"/auth/register"}
+                        to={"/auth/signup"}
                         className="text-secondary font-medium hover:underline"
                     >
                         create new account
                     </Link>
                 </h3>
+                {/* SOCIAL LOGIN  */}
+
+                <>
+                    <SocialLogin />
+                </>
             </div>
         </section>
     );
