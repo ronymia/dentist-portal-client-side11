@@ -16,19 +16,29 @@ const Header = () => {
                     </NavLink>
                </li>
                <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/about"}>About</NavLink>
+                    <NavLink to={"/about"}
+                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                    >About</NavLink>
                </li>
                <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/appointment"}>Appointment</NavLink>
+                    <NavLink to={"/appointment"}
+                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                    >Appointment</NavLink>
                </li>
                <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/reviews"}>Reviews</NavLink>
+                    <NavLink to={"/reviews"}
+                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                    >Reviews</NavLink>
                </li>
                <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/contact"}>Contact Us</NavLink>
+                    <NavLink to={"/contact"}
+                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                    >Contact Us</NavLink>
                </li>
                <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/dashboard"}>Dashboard</NavLink>
+                    <NavLink to={"/dashboard"}
+                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                    >Dashboard</NavLink>
                </li>
           </>
      );

@@ -127,12 +127,12 @@ export default function SignUp() {
                         </label>
                         <input
                             type="password"
-                            placeholder="your password"
+                            placeholder="new password"
                             className="block h-12 w-[360px] md:w-[400px] bg-white rounded-lg border border-[#cfcfcf] py-2 px-4 placeholder:capitalize placeholder:text-[15px] placeholder:text-[#A2A2A2] text-darkBlack font-medium text-lg text-dark focus:outline-none"
                             {...register("password", {
                                 required: {
                                     value: true,
-                                    message: "Your Password is required"
+                                    message: "Password is required"
                                 },
                                 minLength: {
                                     value: 6,
