@@ -3,6 +3,7 @@ import Banner from '../Banner/Banner';
 import InfoCards from '../InfoCards/InfoCards';
 import MakeAppointment from '../MakeAppointment/MakeAppointment';
 import Services from '../Services/Services';
+import Testimonial from '../Testimonial/Testimonial';
 
 export default function Home() {
      return (
@@ -11,6 +12,7 @@ export default function Home() {
                <InfoCards />
                <Services />
                <MakeAppointment />
+               <Testimonial />
           </div>
      );
 }
