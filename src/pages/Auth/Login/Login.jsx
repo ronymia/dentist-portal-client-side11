@@ -22,41 +22,41 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
 
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    //     const { email, password } = data;
+    const handleLogin = (data) => {
+        console.log(data);
+        const { email, password } = data;
 
-    //     // user login
-    //     signInUser(email, password)
-    //         .then(result => {
-    //             const user = result.user;
-    //             if (user) {
-    //                 reset();
-    //                 toast.success('Successfully Login');
-    //                 navigate(from, { replace: true });
-    //             }
-    //         }).catch(error => {
-    //             const errorCode = error.code;
+        // user login
+        // signInUser(email, password)
+        //     .then(result => {
+        //         const user = result.user;
+        //         if (user) {
+        //             reset();
+        //             toast.success('Successfully Login');
+        //             navigate(from, { replace: true });
+        //         }
+        //     }).catch(error => {
+        //         const errorCode = error.code;
 
-    //             if (errorCode) {
-    //                 switch (errorCode) {
-    //                     case 'auth/user-not-found':
-    //                         setLoginError('User not founded');
-    //                         break;
-    //                     case 'auth/invalid-email':
-    //                         setLoginError('Invalid email provided, please provide a valid email')
-    //                         break;
+        //         if (errorCode) {
+        //             switch (errorCode) {
+        //                 case 'auth/user-not-found':
+        //                     setLoginError('User not founded');
+        //                     break;
+        //                 case 'auth/invalid-email':
+        //                     setLoginError('Invalid email provided, please provide a valid email')
+        //                     break;
 
-    //                     case 'auth/wrong-password':
-    //                         setLoginError('Wrong password');
-    //                         break;
+        //                 case 'auth/wrong-password':
+        //                     setLoginError('Wrong password');
+        //                     break;
 
-    //                     default:
-    //                         setLoginError('Something is wrong');
-    //                 }
-    //             }
-    //         });
-    // };
+        //                 default:
+        //                     setLoginError('Something is wrong');
+        //             }
+        //         }
+        //     });
+    };
 
     return (
         <section className="w-full bg-white h-[90vh] flex items-center justify-center">
@@ -70,6 +70,7 @@ const Login = () => {
                     Login
                 </h1>
                 <form
+                    onSubmit={handleSubmit(handleLogin)}
                     className="flex flex-col gap-5"
                 >
                     {/* email input  */}
