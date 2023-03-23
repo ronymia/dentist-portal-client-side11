@@ -67,7 +67,7 @@ export default function SignUp() {
                 className='rounded-[18px] p-8'>
                 <h2 className='text-4xl text-center text-dark mb-5 font-medium'>Sign Up</h2>
                 <form
-                    onSubmit={onSubmit(handleSignUp)}
+                    onSubmit={handleSubmit(handleSignUp)}
                     className="flex flex-col gap-5"
                 >
                     <div className="flex flex-col gap-2">
