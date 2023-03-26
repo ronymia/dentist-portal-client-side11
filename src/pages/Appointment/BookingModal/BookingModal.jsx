@@ -1,0 +1,61 @@
+import React from 'react';
+
+export default function BookingModal({ treatment }) {
+     // treatment is just another name of appointmentOptions with name, slots, _id
+     const { name: treatmentName, slots, price } = treatment;
+
+     return (
+          <>
+               <input type="checkbox" id="booking-modal" className="modal-toggle" />
+               <div className="modal">
+                    <div className="modal-box relative">
+                         {/* modal close  */}
+                         <label htmlFor="booking-modal"
+                              className="btn btn-sm btn-circle absolute right-2 top-2 bg-red-500 hover:bg-red-500 text-white">✕</label>
+
+                         <h3 className="text-lg font-bold">{treatmentName}</h3>
+                         <form
+                              // onSubmit={handleBooking}
+                              className='grid grid-cols-1 gap-3 mt-10'>
+                              <input type="text"
+                                   className="input w-full input-bordered "
+                              // disabled value={date} 
+                              />
+                              <select name="slot" className="select select-bordered w-full">
+                                   {
+                                        slots.map((slot, i) => <option
+                                             value={slot}
+                                             key={i}
+                                        >{slot}</option>)
+                                   }
+                              </select>
+                              <input type="text"
+                                   name="name"
+                                   // defaultValue={user?.displayName}
+                                   disabled
+                                   placeholder="Your Name"
+                                   className="input w-full input-bordered"
+                              />
+                              <input type="email"
+                                   name="email"
+                                   // defaultValue={user?.email}
+                                   disabled
+                                   placeholder="Email Address"
+                                   className="input w-full input-bordered"
+                              />
+                              <input type="text"
+                                   name="phone"
+                                   placeholder="Phone Number"
+                                   className="input w-full input-bordered"
+                              />
+                              <br />
+                              <input
+                                   type="submit" value="Submit"
+                                   className='btn btn-accent w-full bg-dark border-dark'
+                              />
+                         </form>
+                    </div>
+               </div>
+          </>
+     );
+}
