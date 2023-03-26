@@ -18,6 +18,9 @@ export default function AppointmentBanner({ selectedDate, setSelectedDate }) {
                     <img src={chair} alt="dentist chair" className="max-w-sm lg:max-w-lg rounded-lg shadow-2xl" />
                     <div className='mr-6 sm:w-full'>
                         <DayPicker
+                            styles={{
+                                caption: { color: 'black' }
+                            }}
                             mode='single'
                             selected={selectedDate}
                             onSelect={setSelectedDate} />

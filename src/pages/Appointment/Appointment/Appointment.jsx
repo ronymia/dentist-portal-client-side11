@@ -11,6 +11,9 @@ export default function Appointment() {
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
                />
+               <AvailableAppointments
+                    selectedDate={selectedDate}
+               />
           </div>
      );
 }

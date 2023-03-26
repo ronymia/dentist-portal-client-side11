@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 //react day picker-css
 import 'react-day-picker/dist/style.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>
 );
