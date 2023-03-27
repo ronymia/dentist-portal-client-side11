@@ -4,6 +4,17 @@ export default function BookingModal({ treatment }) {
      // treatment is just another name of appointmentOptions with name, slots, _id
      const { name: treatmentName, slots, price } = treatment;
 
+     const {
+          register,
+          handleSubmit,
+          watch,
+          reset,
+          formState: { errors } } = useForm();
+
+     const handleBooking = (data) => {
+          const { name } = data;
+     }
+
      return (
           <>
                <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -15,7 +26,7 @@ export default function BookingModal({ treatment }) {
 
                          <h3 className="text-lg font-bold">{treatmentName}</h3>
                          <form
-                              // onSubmit={handleBooking}
+                              onSubmit={handleSubmit(handleBooking)}
                               className='grid grid-cols-1 gap-3 mt-10'>
                               <input type="text"
                                    className="input w-full input-bordered "
@@ -35,6 +46,7 @@ export default function BookingModal({ treatment }) {
                                    disabled
                                    placeholder="Your Name"
                                    className="input w-full input-bordered"
+                                   {...register("name")}
                               />
                               <input type="email"
                                    name="email"
