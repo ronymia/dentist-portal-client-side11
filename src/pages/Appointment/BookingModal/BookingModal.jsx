@@ -35,7 +35,7 @@ export default function BookingModal({ treatment }) {
                               />
                               <select name="slot"
                                    className="select select-bordered w-full"
-                                   {...register(slot)}
+                                   {...register("slot")}
                               >
                                    {
                                         slots.map((slot, i) => <option
