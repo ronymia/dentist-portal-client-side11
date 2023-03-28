@@ -1,4 +1,5 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function BookingModal({ treatment }) {
      // treatment is just another name of appointmentOptions with name, slots, _id
@@ -12,7 +13,7 @@ export default function BookingModal({ treatment }) {
           formState: { errors } } = useForm();
 
      const handleBooking = (data) => {
-          const { name } = data;
+          const { slot, phone } = data;
      }
 
      return (
@@ -32,7 +33,10 @@ export default function BookingModal({ treatment }) {
                                    className="input w-full input-bordered "
                               // disabled value={date} 
                               />
-                              <select name="slot" className="select select-bordered w-full">
+                              <select name="slot"
+                                   className="select select-bordered w-full"
+                                   {...register(slot)}
+                              >
                                    {
                                         slots.map((slot, i) => <option
                                              value={slot}
@@ -59,6 +63,7 @@ export default function BookingModal({ treatment }) {
                                    name="phone"
                                    placeholder="Phone Number"
                                    className="input w-full input-bordered"
+                                   {...register("phone")}
                               />
                               <br />
                               <input
