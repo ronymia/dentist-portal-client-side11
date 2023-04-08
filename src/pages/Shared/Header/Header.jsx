@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 
 const Header = () => {
+     const { user, logOut } = useContext(AuthContext);
      const [toggleIsOpned, setToggleIsOpned] = useState(false);
+
+     const handleLogOut = () => {
+          logOut()
+               .then(() => { })
+               .catch(err => console.log(err));
+     }
 
      const menuItems = (
           <>
@@ -56,12 +64,22 @@ const Header = () => {
                     </ul>
                </div>
                <div className="navbar-end gap-2">
-                    <Link
-                         to={"/auth/login"}
-                         className=" text-dark hover:bg-dark hover:text-white font-semibold md:text-lg text-[14px] border border-dark px-5 py-[10px] rounded-lg"
-                    >
-                         Login
-                    </Link>
+                    {
+                         user?.uid ?
+                              <button type="button"
+                                   onClick={handleLogOut}
+                                   className=" text-dark hover:bg-dark hover:text-white font-semibold md:text-lg text-[14px] border border-dark px-5 py-[10px] rounded-lg"
+                              >
+                                   Log Out
+                              </button>
+                              :
+                              <Link
+                                   to={"/auth/login"}
+                                   className=" text-dark hover:bg-dark hover:text-white font-semibold md:text-lg text-[14px] border border-dark px-5 py-[10px] rounded-lg"
+                              >
+                                   Login
+                              </Link>
+                    }
 
 
                     {/* responsive nav hamburger  */}
