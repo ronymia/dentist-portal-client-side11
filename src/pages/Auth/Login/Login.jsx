@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import { AuthContext } from "../../../contexts/AuthProvider";
+import { toast } from "react-hot-toast";
 
 // import { useAuth } from "../../../hooks/useAuth";
 // import { toast } from "react-hot-toast";
@@ -9,7 +11,7 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // const { signInUser } = useAuth();
+    const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const {
         register,
@@ -23,39 +25,40 @@ const Login = () => {
 
 
     const handleLogin = (data) => {
-        console.log(data);
+        // console.log(data);
+        setLoginError('');
         const { email, password } = data;
 
         // user login
-        // signInUser(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         if (user) {
-        //             reset();
-        //             toast.success('Successfully Login');
-        //             navigate(from, { replace: true });
-        //         }
-        //     }).catch(error => {
-        //         const errorCode = error.code;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                if (user) {
+                    reset();
+                    toast.success('Successfully Login');
+                    navigate(from, { replace: true });
+                }
+            }).catch(error => {
+                const errorCode = error.code;
 
-        //         if (errorCode) {
-        //             switch (errorCode) {
-        //                 case 'auth/user-not-found':
-        //                     setLoginError('User not founded');
-        //                     break;
-        //                 case 'auth/invalid-email':
-        //                     setLoginError('Invalid email provided, please provide a valid email')
-        //                     break;
+                if (errorCode) {
+                    switch (errorCode) {
+                        case 'auth/user-not-found':
+                            setLoginError('User not founded');
+                            break;
+                        case 'auth/invalid-email':
+                            setLoginError('Invalid email provided, please provide a valid email')
+                            break;
 
-        //                 case 'auth/wrong-password':
-        //                     setLoginError('Wrong password');
-        //                     break;
+                        case 'auth/wrong-password':
+                            setLoginError('Wrong password');
+                            break;
 
-        //                 default:
-        //                     setLoginError('Something is wrong');
-        //             }
-        //         }
-        //     });
+                        default:
+                            setLoginError('Something is wrong');
+                    }
+                }
+            });
     };
 
     return (
