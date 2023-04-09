@@ -5,10 +5,8 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 
-// import { useAuth } from "../../../hooks/useAuth";
-// import { toast } from "react-hot-toast";
 
-const Login = () => {
+export default function Login() {
     const navigate = useNavigate();
     const location = useLocation();
     const { signIn } = useContext(AuthContext);
@@ -16,16 +14,14 @@ const Login = () => {
     const {
         register,
         handleSubmit,
-        watch,
         reset,
         formState: { errors } } = useForm();
 
-    //user navigate
+    //user navigation
     const from = location.state?.from?.pathname || "/";
 
 
     const handleLogin = (data) => {
-        // console.log(data);
         setLoginError('');
         const { email, password } = data;
 
@@ -47,7 +43,7 @@ const Login = () => {
                             setLoginError('User not founded');
                             break;
                         case 'auth/invalid-email':
-                            setLoginError('Invalid email provided, please provide a valid email')
+                            setLoginError('Invalid email provided, please provide a valid email');
                             break;
 
                         case 'auth/wrong-password':
@@ -97,8 +93,7 @@ const Login = () => {
                                     value: /^\S+@\S+\.\S+$/,
                                     message: "Provide a valid Email"
                                 }
-                            })}
-                        />
+                            })} />
                         {/* error message  */}
                         {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
@@ -126,8 +121,7 @@ const Login = () => {
                                     value: 6,
                                     message: "Must be 6 character or longer"
                                 }
-                            })}
-                        />
+                            })} />
                         {/* error message   */}
                         {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                         {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
@@ -163,6 +157,4 @@ const Login = () => {
             </div>
         </section>
     );
-};
-
-export default Login;
+}

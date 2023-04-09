@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../../contexts/AuthProvider';
-// import useToken from '../../hooks/useToken';
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -12,7 +11,12 @@ export default function SignUp() {
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     // const [token] = useToken(createdUserEmail);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors } } = useForm();
 
     // if (token) {
     //     navigate('/');
@@ -24,8 +28,8 @@ export default function SignUp() {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                toast('User Created Successfully.');
+                reset();
+                toast.success('User Created Successfully.');
                 const userInfo = {
                     displayName: data.name
                 };
