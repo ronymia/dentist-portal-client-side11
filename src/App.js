@@ -3,7 +3,7 @@ import { router } from "./routes/Routes/Routes";
 import { Toaster } from "react-hot-toast";
 
 
-function App() {
+export default function App() {
 
   return (
     <>
@@ -12,5 +12,3 @@ function App() {
     </>
   )
 }
-
-export default App;
