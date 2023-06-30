@@ -35,7 +35,7 @@ export default function AvailableAppointments({ selectedDate }) {
                     setTreatment={setTreatment}
                 ></AppointmentOption>)}
             </div>
-            {/*   */}
+
             {
                 treatment &&
                 <BookingModal
