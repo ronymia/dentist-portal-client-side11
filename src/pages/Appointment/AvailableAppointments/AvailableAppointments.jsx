@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import BookingModal from '../BookingModal/BookingModal';
 import AppointmentOption from './AppointmentOption';
+import Loader from '../../Shared/Loader/Loader';
 
 
 export default function AvailableAppointments({ selectedDate }) {
@@ -22,7 +23,7 @@ export default function AvailableAppointments({ selectedDate }) {
     });
 
     if (isLoading) {
-        return <h1>loading</h1>;
+        return <Loader />;
     }
 
     return (
