@@ -1,9 +1,14 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 export default function BookingModal({ treatment }) {
+     const { user } = useContext(AuthContext);
+
      // treatment is just another name of appointmentOptions with name, slots, _id
      const { name: treatmentName, slots, price } = treatment;
+     // const date = format(selectDate, 'PP');
 
      const {
           register,
@@ -46,7 +51,7 @@ export default function BookingModal({ treatment }) {
                               </select>
                               <input type="text"
                                    name="name"
-                                   // defaultValue={user?.displayName}
+                                   defaultValue={user?.displayName}
                                    disabled
                                    placeholder="Your Name"
                                    className="input w-full input-bordered"
@@ -54,7 +59,7 @@ export default function BookingModal({ treatment }) {
                               />
                               <input type="email"
                                    name="email"
-                                   // defaultValue={user?.email}
+                                   defaultValue={user?.email}
                                    disabled
                                    placeholder="Email Address"
                                    className="input w-full input-bordered"
