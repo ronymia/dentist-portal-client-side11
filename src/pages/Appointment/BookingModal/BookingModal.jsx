@@ -3,12 +3,12 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
-export default function BookingModal({ treatment }) {
+export default function BookingModal({ treatment, setTreatment, selectedDate, refetch }) {
      const { user } = useContext(AuthContext);
 
      // treatment is just another name of appointmentOptions with name, slots, _id
      const { name: treatmentName, slots, price } = treatment;
-     // const date = format(selectDate, 'PP');
+     const date = format(selectedDate, 'PP');
 
      const {
           register,
@@ -19,6 +19,7 @@ export default function BookingModal({ treatment }) {
 
      const handleBooking = (data) => {
           const { slot, phone } = data;
+          console.log(data)
      }
 
      return (
@@ -36,7 +37,8 @@ export default function BookingModal({ treatment }) {
                               className='grid grid-cols-1 gap-3 mt-10'>
                               <input type="text"
                                    className="input w-full input-bordered "
-                              // disabled value={date} 
+                                   {...register("date")}
+                                   disabled value={date}
                               />
                               <select name="slot"
                                    className="select select-bordered w-full"
@@ -63,6 +65,7 @@ export default function BookingModal({ treatment }) {
                                    disabled
                                    placeholder="Email Address"
                                    className="input w-full input-bordered"
+                                   {...register("email")}
                               />
                               <input type="text"
                                    name="phone"

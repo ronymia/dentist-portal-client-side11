@@ -41,6 +41,9 @@ export default function AvailableAppointments({ selectedDate }) {
                 treatment &&
                 <BookingModal
                     treatment={treatment}
+                    setTreatment={setTreatment}
+                    selectedDate={selectedDate}
+                    refetch={refetch}
                 />
             }
         </section>
