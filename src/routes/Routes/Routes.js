@@ -3,6 +3,7 @@ import MainLayout from "../../layouts/MainLayout";
 import { Appointment, Home } from "../../pages";
 import Login from "../../pages/Auth/Login/Login";
 import SignUp from "../../pages/Auth/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/appointment",
-                element: <Appointment />
+                element: <PrivateRoute><Appointment /></PrivateRoute>
             }
         ]
     },

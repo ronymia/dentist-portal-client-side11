@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 export default function SignUp() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
@@ -18,6 +19,8 @@ export default function SignUp() {
         reset,
         formState: { errors } } = useForm();
 
+    //user navigation
+    const from = location.state?.from?.pathname || "/";
     // if (token) {
     //     navigate('/');
     // }
@@ -33,9 +36,13 @@ export default function SignUp() {
                 const userInfo = {
                     displayName: data.name
                 };
+                if (user) {
+                    navigate(from, { replace: true });
+                }
                 await updateUser(userInfo)
                     .then(() => {
                         saveUser(data.name, data.email);
+
                     })
                     .catch(err => console.log(err));
             })

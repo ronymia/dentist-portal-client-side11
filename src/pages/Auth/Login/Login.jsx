@@ -21,12 +21,12 @@ export default function Login() {
     const from = location.state?.from?.pathname || "/";
 
 
-    const handleLogin = (data) => {
+    const handleLogin = async (data) => {
         setLoginError('');
         const { email, password } = data;
 
         // user login
-        signIn(email, password)
+        await signIn(email, password)
             .then(result => {
                 const user = result.user;
                 if (user) {
