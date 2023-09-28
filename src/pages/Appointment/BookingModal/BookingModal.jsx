@@ -22,6 +22,8 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
           console.log(data)
      }
 
+     console.log(user);
+
      return (
           <>
                <input type="checkbox" id="booking-modal" className="modal-toggle" />

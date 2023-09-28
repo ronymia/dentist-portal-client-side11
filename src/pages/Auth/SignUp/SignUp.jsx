@@ -22,18 +22,18 @@ export default function SignUp() {
     //     navigate('/');
     // }
 
-    const handleSignUp = (data) => {
+    const handleSignUp = async (data) => {
         // console.log(data);
         setSignUPError('');
-        createUser(data.email, data.password)
-            .then(result => {
+        await createUser(data.email, data.password)
+            .then(async result => {
                 const user = result.user;
                 reset();
                 toast.success('User Created Successfully.');
                 const userInfo = {
                     displayName: data.name
                 };
-                updateUser(userInfo)
+                await updateUser(userInfo)
                     .then(() => {
                         saveUser(data.name, data.email);
                     })
