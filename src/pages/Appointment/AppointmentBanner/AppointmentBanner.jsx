@@ -4,7 +4,8 @@ import { DayPicker } from 'react-day-picker';
 import bannerBg from '../../../assets/images/bg.png';
 
 export default function AppointmentBanner({ selectedDate, setSelectedDate }) {
-    console.log(selectedDate);
+    // console.log(selectedDate);
+
     return (
         <header
             style={{

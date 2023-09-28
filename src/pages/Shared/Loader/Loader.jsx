@@ -10,7 +10,7 @@ const Loader = () => {
                     radius={5}
                     color="#4fa94d"
                     ariaLabel="ball-triangle-loading"
-                    wrapperClass={{}}
+                    wrapper ClassName={{}}
                     wrapperStyle=""
                     visible={true}
                />

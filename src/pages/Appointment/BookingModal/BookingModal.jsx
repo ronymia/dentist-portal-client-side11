@@ -15,14 +15,31 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
           handleSubmit,
           watch,
           reset,
-          formState: { errors } } = useForm();
+          formState: { errors } } = useForm(
+               {
+                    defaultValues: {
+                         name: user?.displayName,
+                         email: user?.email,
+                         date: date
+                    }
+               }
+          );
 
      const handleBooking = (data) => {
-          const { slot, phone } = data;
-          console.log(data)
-     }
+          const { slot, phone, date, name, email } = data;
 
-     console.log(user);
+          const booking = {
+               appointmentDate: date,
+               treatment: treatmentName,
+               patient: name,
+               slot,
+               email,
+               phone,
+               price
+          }
+          // close modal
+          setTreatment(null);
+     }
 
      return (
           <>
@@ -40,7 +57,7 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
                               <input type="text"
                                    className="input w-full input-bordered "
                                    {...register("date")}
-                                   disabled value={date}
+                                   disabled
                               />
                               <select name="slot"
                                    className="select select-bordered w-full"
@@ -54,23 +71,18 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
                                    }
                               </select>
                               <input type="text"
-                                   name="name"
-                                   defaultValue={user?.displayName}
                                    disabled
                                    placeholder="Your Name"
                                    className="input w-full input-bordered"
                                    {...register("name")}
                               />
                               <input type="email"
-                                   name="email"
-                                   defaultValue={user?.email}
                                    disabled
                                    placeholder="Email Address"
                                    className="input w-full input-bordered"
                                    {...register("email")}
                               />
                               <input type="text"
-                                   name="phone"
                                    placeholder="Phone Number"
                                    className="input w-full input-bordered"
                                    {...register("phone")}
