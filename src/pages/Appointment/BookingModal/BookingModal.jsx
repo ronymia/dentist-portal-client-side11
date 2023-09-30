@@ -2,6 +2,8 @@ import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function BookingModal({ treatment, setTreatment, selectedDate, refetch }) {
      const { user } = useContext(AuthContext);
@@ -13,8 +15,6 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
      const {
           register,
           handleSubmit,
-          watch,
-          reset,
           formState: { errors } } = useForm(
                {
                     defaultValues: {
@@ -25,7 +25,7 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
                }
           );
 
-     const handleBooking = (data) => {
+     const handleBooking = async (data) => {
           const { slot, phone, date, name, email } = data;
 
           const booking = {
@@ -37,8 +37,22 @@ export default function BookingModal({ treatment, setTreatment, selectedDate, re
                phone,
                price
           }
-          // close modal
-          setTreatment(null);
+
+          await axios.post("http://localhost:5000/bookings", booking)
+               .then(res => {
+                    console.log(res.data)
+                    if (res.data.acknowledged) {
+                         toast.success(`bookings confirm on ${date}`)
+                         // ui update
+                         refetch();
+                    }
+                    else {
+                         toast.error(res.data.message);
+                    }
+                    // close modal
+                    setTreatment(null);
+               })
+               .catch(error => console.log(error))
      }
 
      return (
