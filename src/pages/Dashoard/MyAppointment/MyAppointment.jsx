@@ -3,8 +3,12 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
 import { format } from 'date-fns';
+import useAuth from "../../../hooks/useAuth";
 
 export default function MyAppointment() {
+     const { user } = useAuth();
+
+     console.log(user?.email);
 
      //current date
      const date = format(new Date(), "PP");
@@ -13,7 +17,7 @@ export default function MyAppointment() {
      const { data: bookings = [], isLoading } = useQuery({
           queryKey: ["bookings"],
           queryFn: async () => {
-               return await axios.get(`http://localhost:5000/bookings?date=${date}`)
+               return await axios.get(`http://localhost:5000/bookings?date=${date}&&email=${user?.email}`)
                     .then(res => {
                          // console.log(res.data)
                          return res.data;
@@ -33,7 +37,7 @@ export default function MyAppointment() {
                     <h2 className='text-black text-2xl'>My Appointment</h2>
                     <button type="button"
                          className='h-11 w-28 border border-black rounded-lg text-black text-sm'
-                    >MAY 10, 2022</button>
+                    >{date}</button>
                </div>
 
                <table className='w-full mt-5'>
