@@ -4,6 +4,8 @@ import { Appointment, Home } from "../../pages";
 import Login from "../../pages/Auth/Login/Login";
 import SignUp from "../../pages/Auth/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Dashboard from "../../layouts/Dashboard";
+import MyAppointment from "../../pages/Dashoard/MyAppointment/MyAppointment";
 
 export const router = createBrowserRouter([
     {
@@ -28,5 +30,15 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+            {
+                index: true,
+                element: <MyAppointment />
+            }
+        ]
+    }
 
 ]);
