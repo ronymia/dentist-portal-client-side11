@@ -6,6 +6,10 @@ import App from './App';
 import 'react-day-picker/dist/style.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AuthProvider from './contexts/AuthProvider';
+import axios from 'axios';
+
+//default url 
+axios.defaults.baseURL = "http://localhost:5000";
 
 const queryClient = new QueryClient();
 

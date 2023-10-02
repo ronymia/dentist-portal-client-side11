@@ -15,9 +15,9 @@ export default function MyAppointment() {
 
      //data fetching
      const { data: bookings = [], isLoading } = useQuery({
-          queryKey: ["bookings"],
+          queryKey: ["bookings", user?.email, date],
           queryFn: async () => {
-               return await axios.get(`http://localhost:5000/bookings?date=${date}&&email=${user?.email}`)
+               return await axios.get(`/bookings?date=${date}&&email=${user?.email}`)
                     .then(res => {
                          // console.log(res.data)
                          return res.data;
