@@ -43,11 +43,13 @@ const Header = () => {
                          className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
                     >Contact Us</NavLink>
                </li>
-               <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
-                    <NavLink to={"/dashboard"}
-                         className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
-                    >Dashboard</NavLink>
-               </li>
+               {
+                    user && <li className=" rounded-lg hover:bg-dark hover:text-[#D4D9E3] text-black">
+                         <NavLink to={"/dashboard"}
+                              className={({ isActive }) => (isActive && "text-[#D4D9E3] bg-dark rounded-lg")}
+                         >Dashboard</NavLink>
+                    </li>
+               }
           </>
      );
 
