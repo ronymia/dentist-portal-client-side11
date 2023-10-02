@@ -4,8 +4,10 @@ import { Appointment, Home } from "../../pages";
 import Login from "../../pages/Auth/Login/Login";
 import SignUp from "../../pages/Auth/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Dashboard from "../../layouts/Dashboard";
+import DashboardLayout from "../../layouts/DashboardLayout";
 import MyAppointment from "../../pages/Dashoard/MyAppointment/MyAppointment";
+import Dashboard from "../../pages/Dashoard/Dashboard/Dashboard";
+import AllUsers from "../../pages/Dashoard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -31,13 +33,21 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: "/dashboard",
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        path: "dashboard",
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children: [
             {
                 index: true,
+                element: <Dashboard />
+            },
+            {
+                path: "myAppointment",
                 element: <MyAppointment />
-            }
+            },
+            {
+                path: "allUsers",
+                element: <AllUsers />
+            },
         ]
     }
 
