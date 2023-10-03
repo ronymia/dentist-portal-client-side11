@@ -1,18 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useAuth from '../../../hooks/useAuth';
 
 export default function SignUp() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useAuth();
     const [signUpError, setSignUPError] = useState('');
-    const [createdUserEmail, setCreatedUserEmail] = useState('');
-    // const [token] = useToken(createdUserEmail);
-
     const {
         register,
         handleSubmit,
@@ -31,18 +30,25 @@ export default function SignUp() {
         await createUser(data.email, data.password)
             .then(async result => {
                 const user = result.user;
-                reset();
-                toast.success('User Created Successfully.');
                 const userInfo = {
                     displayName: data.name
                 };
-                if (user) {
-                    navigate(from, { replace: true });
-                }
-                await updateUser(userInfo)
-                    .then(() => {
-                        saveUser(data.name, data.email);
 
+                // user info update
+                await updateUser(userInfo)
+                    .then(async () => {
+                        const savedUser = { name: data.name, email: data.email };
+
+                        // save user to database
+                        await axios.post("/users", savedUser)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    toast.success('User Created Successfully.');
+                                    navigate(from, { replace: true });
+                                    reset();
+                                }
+                            })
+                            .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err));
             })
@@ -51,22 +57,6 @@ export default function SignUp() {
                 setSignUPError(error.message);
             });
     };
-
-    const saveUser = (name, email) => {
-        const user = { name, email };
-        fetch('https://doctors-portal-server-rust.vercel.app/users', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(data => {
-                setCreatedUserEmail(email);
-            });
-    };
-
 
 
     return (
