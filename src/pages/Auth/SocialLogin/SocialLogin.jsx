@@ -5,12 +5,12 @@ import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
 
 export default function SocialLogin() {
-     const { googleSignIn } = useAuth();
      const navigate = useNavigate();
      const location = useLocation();
+     const { googleSignIn } = useAuth();
 
      //user redirect
-     const from = location?.state?.from?.pathname || "/";
+     const from = location.state?.from?.pathname || "/";
 
      const handleGoogleSignIn = () => {
           googleSignIn()
