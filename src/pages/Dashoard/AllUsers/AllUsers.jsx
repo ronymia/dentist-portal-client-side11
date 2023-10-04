@@ -19,7 +19,7 @@ export default function Allusers() {
      const isAdmin = true;
 
      const handleMakeAdmin = async (user) => {
-          await axios.patch((`/users/admin/${user._id}`))
+          const makeAdmin = await axios.patch((`/users/admin/${user._id}`))
                .then(res => {
                     if (res.data.modifiedCount) {
                          refetch();

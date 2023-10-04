@@ -4,12 +4,11 @@ import { useQuery } from 'react-query';
 import Loader from '../../Shared/Loader/Loader';
 import { format } from 'date-fns';
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 export default function MyAppointment() {
      const { user } = useAuth();
-
-     // getting token from local DB
-     const token = localStorage.getItem('access-token');
+     const [axiosSecure] = useAxiosSecure();
 
      //current date
      const date = format(new Date(), "PP");
@@ -18,15 +17,8 @@ export default function MyAppointment() {
      const { data: bookings = [], isLoading } = useQuery({
           queryKey: ["bookings", user?.email, date],
           queryFn: async () => {
-               return await axios.get(`/bookings?date=${date}&&email=${user?.email}`, {
-                    headers: {
-                         authorization: `bearer ${token}`
-                    }
-               })
-                    .then(res => {
-                         // console.log(res.data)
-                         return res.data;
-                    }).catch(error => console.log(error))
+               const res = await axiosSecure.get(`/bookings?date=${date}&&email=${user?.email}`)
+               return res.data;
           }
      });
 

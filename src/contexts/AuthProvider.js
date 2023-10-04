@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
             console.log('user observing', currentUser);
             setUser(currentUser);
 
-            // get and set token
+            // get and set access token
             if (currentUser) {
                 axios.post("/jwt", { email: currentUser.email })
                     .then(res => {
