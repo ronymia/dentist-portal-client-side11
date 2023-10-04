@@ -8,8 +8,6 @@ import useAuth from "../../../hooks/useAuth";
 export default function MyAppointment() {
      const { user } = useAuth();
 
-     console.log(user?.email);
-
      //current date
      const date = format(new Date(), "PP");
 
@@ -29,7 +27,7 @@ export default function MyAppointment() {
           return <Loader />
      }
 
-     console.log(bookings)
+     // console.log(bookings)
 
      return (
           <div className="col-span-4 bg-[#F1F5F9] p-14">
@@ -53,7 +51,7 @@ export default function MyAppointment() {
                               bookings &&
                               bookings?.map(booked =>
                                    <tr className='text-center h-12 bg-white text-black'>
-                                        {console.log(booked)}
+                                        {/* {console.log(booked)} */}
                                         <td>{booked.patient}</td>
                                         <td>{booked.treatment}</td>
                                         <td>{booked.slot}</td>
