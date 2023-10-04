@@ -9,6 +9,7 @@ import {
     updateProfile
 } from 'firebase/auth';
 import { auth } from '../Config/firebase.config';
+import axios from 'axios';
 
 
 export const AuthContext = createContext();
@@ -50,6 +51,17 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             // console.log('user observing', currentUser);
             setUser(currentUser);
+
+            if (currentUser) {
+                axios.post("/jwt", currentUser.email)
+                    .then(res => {
+                        console.log(res.data);
+                        localStorage.setItem('access-token', res.data);
+                    })
+            } else {
+                localStorage.removeItem('access-token');
+            }
+
             setLoading(false);
         });
 
