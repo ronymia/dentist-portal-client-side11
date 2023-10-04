@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Loader from "../../Shared/Loader/Loader";
+import toast from 'react-hot-toast';
 
 export default function Allusers() {
      const { data: users = [], isLoading, refetch } = useQuery({
@@ -14,6 +15,28 @@ export default function Allusers() {
                     .catch(err => { console.log(err) })
           }
      })
+
+     const isAdmin = true;
+
+     const handleMakeAdmin = async (user) => {
+          await axios.patch((`/users/admin/${user._id}`))
+               .then(res => {
+                    if (res.data.modifiedCount) {
+                         refetch();
+                         toast.success("make an admin")
+                    }
+               }).catch(err => console.log(err));
+     }
+
+     const handleDelete = async (user) => {
+          await axios.delete((`/user/${user._id}`))
+               .then(res => {
+                    refetch();
+                    if (res.data.deletedCount > 0) {
+                         toast.success("delete succesfully")
+                    }
+               }).catch(err => console.log(err));
+     }
 
      if (isLoading) {
           return <Loader />
@@ -38,11 +61,18 @@ export default function Allusers() {
                               users &&
                               users?.map((user) =>
                                    <tr key={user._id}
-                                        className='text-center h-12 bg-white text-black'>
+                                        className='text-center h-14 bg-white text-black'>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
-                                        <td>{user?.role ? "Admin" : "Make Admin"}</td>
-                                        <td>{"Remove user"}</td>
+                                        <td>{user?.role ? "Admin" : <button type='button'
+                                             onClick={() => handleMakeAdmin(user)}
+                                             className='bg-[#383838] text-white font-medium h-10 w-32 rounded-md'
+                                        >Make Admin</button>}</td>
+                                        <td><button type="button"
+                                             onClick={() => handleDelete(user)}
+                                             className='bg-[#383838] text-white font-medium h-10 w-32 rounded-md'
+                                        >
+                                             Remove user</button></td>
                                    </tr>
                               )
                          }
