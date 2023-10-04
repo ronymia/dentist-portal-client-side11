@@ -8,6 +8,9 @@ import useAuth from "../../../hooks/useAuth";
 export default function MyAppointment() {
      const { user } = useAuth();
 
+     // getting token from local DB
+     const token = localStorage.getItem('access-token');
+
      //current date
      const date = format(new Date(), "PP");
 
@@ -15,7 +18,11 @@ export default function MyAppointment() {
      const { data: bookings = [], isLoading } = useQuery({
           queryKey: ["bookings", user?.email, date],
           queryFn: async () => {
-               return await axios.get(`/bookings?date=${date}&&email=${user?.email}`)
+               return await axios.get(`/bookings?date=${date}&&email=${user?.email}`, {
+                    headers: {
+                         authorization: `bearer ${token}`
+                    }
+               })
                     .then(res => {
                          // console.log(res.data)
                          return res.data;
