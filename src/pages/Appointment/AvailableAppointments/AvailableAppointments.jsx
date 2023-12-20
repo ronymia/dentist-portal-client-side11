@@ -4,11 +4,13 @@ import { useQuery } from 'react-query';
 import BookingModal from '../BookingModal/BookingModal';
 import AppointmentOption from './AppointmentOption';
 import Loader from '../../Shared/Loader/Loader';
+import { useAxiosSecure } from '../../../hooks';
 
 
 export default function AvailableAppointments({ selectedDate }) {
     // const [appointmentOptions,setAppointmentOptions]=useState([]);
     const [treatment, setTreatment] = useState(null);
+    const [axiosSecure] = useAxiosSecure();
 
     const date = format(selectedDate, 'PP');
 
@@ -16,9 +18,8 @@ export default function AvailableAppointments({ selectedDate }) {
     const { data: appointmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['appointmentOptions', date],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`);
-            const data = await res.json();
-            return data;
+            const res = await axiosSecure.get(`http://localhost:5000/appointmentOptions?date=${date}`);
+            return res.data;
         }
     });
 

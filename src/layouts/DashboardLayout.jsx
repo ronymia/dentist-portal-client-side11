@@ -6,6 +6,7 @@ import useAdmin from '../hooks/useAdmin';
 export default function DashboardLayout() {
 
      const [isAdmin, isAdminLoading] = useAdmin();
+     console.log(isAdmin);
 
      return (
           <>

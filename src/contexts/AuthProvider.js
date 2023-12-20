@@ -47,26 +47,51 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    //         console.log('user observing', currentUser);
+    //         setUser(currentUser);
+
+    //         // get and set access token
+    //         if (currentUser) {
+    //             axios.post("/jwt", { email: currentUser.email })
+    //                 .then(res => {
+    //                     // console.log(res.data);
+    //                     localStorage.setItem('access-token', res.data);
+    //                     setLoading(false);
+    //                 })
+    //         } else {
+    //             localStorage.removeItem('access-token');
+    //         }
+
+    //     });
+
+    //     return () => unsubscribe();
+    // }, [])
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log('user observing', currentUser);
             setUser(currentUser);
+            console.log('current user', currentUser);
 
-            // get and set access token
+            // get and set token
             if (currentUser) {
-                axios.post("/jwt", { email: currentUser.email })
-                    .then(res => {
-                        // console.log(res.data);
-                        localStorage.setItem('access-token', res.data);
+                axios.post('/jwt', { email: currentUser.email })
+                    .then(data => {
+                        // console.log(data.data.token)
+                        localStorage.setItem('access-token', data.data)
+                        setLoading(false);
                     })
-            } else {
-                localStorage.removeItem('access-token');
+            }
+            else {
+                localStorage.removeItem('access-token')
             }
 
-            setLoading(false);
-        });
 
-        return () => unsubscribe();
+        });
+        return () => {
+            return unsubscribe();
+        }
     }, [])
 
     const authInfo = {

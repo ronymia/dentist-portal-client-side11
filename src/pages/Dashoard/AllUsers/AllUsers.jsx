@@ -3,23 +3,22 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import Loader from "../../Shared/Loader/Loader";
 import toast from 'react-hot-toast';
+import { useAxiosSecure } from '../../../hooks';
 
 export default function Allusers() {
+     const [axiosSecure] = useAxiosSecure();
+
+     // load all users
      const { data: users = [], isLoading, refetch } = useQuery({
           queryKey: ["users"],
           queryFn: async () => {
-               return await axios.get("/users")
-                    .then(res => {
-                         return res.data;
-                    })
-                    .catch(err => { console.log(err) })
+               const res = await axiosSecure.get("/users");
+               return res.data;
           }
      })
 
-     const isAdmin = true;
-
      const handleMakeAdmin = async (user) => {
-          const makeAdmin = await axios.patch((`/users/admin/${user._id}`))
+          await axios.patch((`/users/admin/${user._id}`))
                .then(res => {
                     if (res.data.modifiedCount) {
                          refetch();
